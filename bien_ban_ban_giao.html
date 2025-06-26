@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Tài Sản Bàn Giao</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font-family for better Vietnamese display and a clean look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to start for document flow */
+            min-height: 100vh;
+            padding: 2rem; /* Padding around the document */
+        }
+        .container {
+            background-color: #ffffff; /* White background for the document */
+            padding: 2.5rem;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 800px; /* Max width for readability */
+            width: 100%;
+        }
+        /* Specific styles for headers to match the document feel */
+        .header-section p {
+            margin: 0;
+            line-height: 1.25;
+        }
+        .document-title {
+            font-size: 1.75rem; /* Larger title */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .info-line {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            margin-bottom: 0.25rem;
+        }
+        .info-label {
+            min-width: 100px; /* Aligns labels */
+            font-weight: normal;
+        }
+        .info-value {
+            flex: 1; /* Takes remaining space */
+            word-break: break-word; /* Prevents long text from overflowing */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Light grey border */
+            padding: 0.75rem 1rem; /* Padding inside cells */
+            text-align: left;
+        }
+        th {
+            background-color: #f8fafc; /* Lighter background for table headers */
+            font-weight: 600; /* Slightly bolder */
+            text-transform: uppercase; /* Uppercase for headers */
+            font-size: 0.875rem; /* Smaller font size */
+            color: #475569; /* Darker text color */
+        }
+        .text-center {
+            text-align: center;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .signature-block {
+            flex: 1;
+        }
+        .signature-name {
+            margin-top: 4rem; /* Space for actual signature */
+            font-weight: bold;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .document-title {
+                font-size: 1.5rem;
+            }
+            .header-section {
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+            .signature-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .info-line {
+                flex-direction: column;
+            }
+            .info-label {
+                margin-bottom: 0.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section text-center mb-6">
+            <p class="font-bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <!-- Updated line as per user request: lowercase, italic, no hyphens -->
+            <p class="italic border-b border-black inline-block pb-0.5">độc lập, tự do, hạnh phúc</p>
+        </div>
+
+        <!-- Document Title -->
+        <h1 class="document-title">DANH SÁCH TÀI SẢN BÀN GIAO</h1>
+        <p class="text-center text-sm mt-2 mb-4">Số: PL1-TSBG-<<[ID]>> (về việc bàn giao tài sản)</p>
+
+        <!-- Contract Details -->
+        <p class="text-sm mb-4">Kèm theo Hợp đồng Thuê nhà số <<[ID]>> ký ngày <<TEXT([Ngày ký],”dd”)>> /<<LEFT(TEXT([Ngày ký],”mmyyyy”),2)>> /<<LEFT(TEXT([Ngày ký],”yyyymm”),4)>>. giữa:</p>
+
+        <!-- Bên Giao (Bên A) -->
+        <div class="mb-4">
+            <p class="section-title">Bên giao (Bên A):</p>
+            <div class="info-line">
+                <span class="info-label">Ông:</span>
+                <span class="info-value pl-2"> <<UPPER([Nhà trọ].[Người đại diện].[Tên nhân viên])>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">HKTT:</span>
+                <span class="info-value pl-2"> <<[Nhà trọ].[Người đại diện].[Địa chỉ]>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">CMND số:</span>
+                <span class="info-value pl-2"> <<[Nhà trọ].[Người đại diện].[Căn cước công dân]>> ngày cấp <<TEXT([Nhà trọ].[Người đại diện].[Ngày cấp],”dd/mm/yyyy”)>> nơi cấp <<[Nhà trọ].[Người đại diện].[Nơi cấp]>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">Điện thoại:</span>
+                <span class="info-value pl-2"> <<[Nhà trọ].[Người đại diện].[Điện thoại]>></span>
+            </div>
+        </div>
+
+        <!-- Bên Nhận (Bên B) -->
+        <div class="mb-4">
+            <p class="section-title">Bên nhận (bên B):</p>
+            <div class="info-line">
+                <span class="info-label">Ông / Bà:</span>
+                <span class="info-value pl-2"> <<[Khách thuê].[Họ và tên]>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">HKTT:</span>
+                <span class="info-value pl-2"> <<[Khách thuê].[Nơi thường trú]>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">CMND số:</span>
+                <span class="info-value pl-2"> <<[Khách thuê].[CCCD / Passport]>></span>
+            </div>
+            <div class="info-line">
+                <span class="info-label">Điện thoại:</span>
+                <span class="info-value pl-2"> <<[Khách thuê].[Số điện thoại]>></span>
+            </div>
+        </div>
+
+        <!-- House and Room Details -->
+        <p class="mt-6 mb-4">Phụ lục này quy định chi tiết các tài sản của căn nhà tại địa chỉ:</p>
+        <p class="mb-4">Phòng số: <<[Phòng trọ].[Tên phòng]>> <<[Nhà trọ].[Tên]>></p>
+
+        <!-- Asset List Table -->
+        <p class="section-title">Danh sách tài sản liên quan</p>
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">TT</th>
+                    <th class="py-2 px-4 border-b">Tên tài sản</th>
+                    <th class="py-2 px-4 border-b">Mô tả</th>
+                    <th class="py-2 px-4 border-b">ĐVT</th>
+                    <th class="py-2 px-4 border-b">Số lượng</th>
+                    <th class="py-2 px-4 border-b">Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Placeholder for dynamic data, you would loop through your assets here -->
+                <tr>
+                    <td class="py-2 px-4 border-b">1</td>
+                    <td class="py-2 px-4 border-b">Điều hòa</td>
+                    <td class="py-2 px-4 border-b">Điều hòa 2 chiều Samsung 9000BTU</td>
+                    <td class="py-2 px-4 border-b">Chiếc</td>
+                    <td class="py-2 px-4 border-b">1</td>
+                    <td class="py-2 px-4 border-b">Mới</td>
+                </tr>
+                <tr>
+                    <td class="py-2 px-4 border-b">2</td>
+                    <td class="py-2 px-4 border-b">Bình nóng lạnh</td>
+                    <td class="py-2 px-4 border-b">Bình nóng lạnh Ariston 30L</td>
+                    <td class="py-2 px-4 border-b">Chiếc</td>
+                    <td class="py-2 px-4 border-b">1</td>
+                    <td class="py-2 px-4 border-b">Mới</td>
+                </tr>
+                <tr>
+                    <td class="py-2 px-4 border-b">3</td>
+                    <td class="py-2 px-4 border-b">Giường</td>
+                    <td class="py-2 px-4 border-b">Giường gỗ công nghiệp 1m6 x 2m</td>
+                    <td class="py-2 px-4 border-b">Chiếc</td>
+                    <td class="py-2 px-4 border-b">1</td>
+                    <td class="py-2 px-4 border-b">Tốt</td>
+                </tr>
+                <!-- End of placeholder -->
+                <!-- The original loop structure, commented out as it's not valid HTML/JS:
+                <<Start: Filter("Tài sản",[Phòng trọ]=[_THISROW].[Phòng trọ])>>
+                <tr>
+                    <td class="py-2 px-4 border-b">
+                        <<count(SPLIT(LEFT(CONCATENATE(select(Tài sản[_rownumber],[Phòng trọ]=[_THISROW].[Phòng trọ])), FIND(trim(CONCATENATE([_ROWNUMBER]," ")), CONCATENATE(select(Tài sản[_rownumber],[Phòng trọ]=[_THISROW].[Phòng trọ]))) +LEN(TEXT([_ROWNUMBER]))-1), “,”))>>
+                    </td>
+                    <td class="py-2 px-4 border-b"><<[Tên tài sản]>></td>
+                    <td class="py-2 px-4 border-b"><<[Mô tả]>></td>
+                    <td class="py-2 px-4 border-b"><<[ĐVT]>></td>
+                    <td class="py-2 px-4 border-b"><<[Số lượng]>></td>
+                    <td class="py-2 px-4 border-b"><<[Tình trạng]>></td>
+                </tr>
+                <<End>>
+                -->
+            </tbody>
+        </table>
+
+        <!-- Concluding remarks -->
+        <p class="mb-4">Bên giao cam đoan rằng toàn bộ các tài sản, công cụ đã được bàn giao đầy đủ.</p>
+        <p class="mb-4">Phụ lục này chia làm 03 bản có giá trị pháp lý như nhau, mỗi bên giữ một bản.</p>
+
+        <!-- Signature Section -->
+        <p class="text-right mt-6 mb-8">Hà nội, ngày<<TEXT([Ngày ký],”dd”)>> tháng <<LEFT(TEXT([Ngày ký],”mmyyyy”),2)>> năm <<LEFT(TEXT([Ngày ký],”yyyymm”),4)>></p>
+
+        <div class="signature-section">
+            <div class="signature-block">
+                <p class="font-bold">Bên nhận</p>
+                <p class="signature-name">(Chữ ký và họ tên)</p>
+            </div>
+            <div class="signature-block">
+                <p class="font-bold">Bên giao</p>
+                <p class="signature-name">Hồ Tuấn Quang</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
