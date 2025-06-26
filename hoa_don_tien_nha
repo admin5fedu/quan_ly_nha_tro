@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa Đơn Tiền Phòng</title>
+    <!-- Import Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom print-specific adjustments for better A4 fit */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .invoice-container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                /* Adjust padding for A4, typically around 1cm to 1.5cm */
+                padding: 1cm !important; /* Uniform padding */
+                width: 21cm; /* A4 width */
+                min-height: 29.7cm; /* A4 height */
+                max-width: none !important; /* Remove max-width for print */
+                margin: 0 auto !important; /* Center on page */
+                font-size: 0.75em; /* Significantly reduce base font size for print */
+                line-height: 1.1; /* Tighten line height */
+                
+                /* Aggressive scaling if content still overflows. Adjust as needed. */
+                transform: scale(0.92); /* Further reduced scale */
+                transform-origin: top left;
+            }
+            /* Further reduce font size for specific elements if still overflowing */
+            .invoice-container h1 {
+                font-size: 1.5em !important; /* Smaller header */
+            }
+            .invoice-container p, .invoice-container span, .invoice-container td, .invoice-container th {
+                font-size: 0.75em !important; /* Consistent smaller text */
+            }
+            .invoice-container .text-xs {
+                 font-size: 0.6em !important; /* Even smaller for very small text */
+            }
+            .invoice-container .text-sm {
+                 font-size: 0.7em !important; /* Smaller for text-sm */
+            }
+            .invoice-container .text-base {
+                 font-size: 0.75em !important; /* Smaller for text-base */
+            }
+            .invoice-container .text-lg {
+                 font-size: 0.8em !important; /* Smaller for text-lg */
+            }
+            .invoice-container .text-xl {
+                 font-size: 0.9em !important; /* Smaller for text-xl */
+            }
+
+            /* Adjust horizontal layout for print */
+            .summary-payment-section {
+                flex-direction: row !important; /* Ensure horizontal for print */
+                align-items: flex-start !important; /* Align tops */
+                justify-content: space-between !important;
+                margin-top: 1.5cm !important; /* Adjust margin */
+            }
+
+            .summary-section, .payment-info-section {
+                width: 48% !important; /* Distribute space */
+                max-width: 48% !important;
+            }
+
+            .payment-info-section {
+                margin-top: 0 !important; /* Remove top margin when horizontal */
+                padding-top: 0 !important;
+                border-top: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- The invoice container with adjusted padding and max-width for A4 fit -->
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg invoice-container" style="padding: 1.5cm 2cm;">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-5">
+            <h1 class="text-2xl font-bold text-gray-800">HÓA ĐƠN TIỀN PHÒNG</h1>
+            <p class="text-sm text-gray-500"><?!= ky_hoa_don ?></p>
+        </header>
+        
+        <!-- Tenant and Room Information -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-5 border-b pb-3">
+            <div>
+                <h2 class="text-xs font-semibold text-gray-500">Khách thuê</h2>
+                <p class="text-base font-medium text-gray-800"><?!= khach_thue ?></p>
+            </div>
+            <div>
+                <h2 class="text-xs font-semibold text-gray-500">Nhà trọ</h2>
+                <p class="text-base font-medium text-gray-800"><?!= nha_tro ?></p>
+            </div>
+            <div>
+                <h2 class="text-xs font-semibold text-gray-500">Phòng trọ</h2>
+                <p class="text-base font-medium text-gray-800"><?!= phong_tro ?></p>
+            </div>
+            <div>
+                <h2 class="text-xs font-semibold text-gray-500">Ngày tính hóa đơn</h2>
+                <p class="text-base font-medium text-gray-800"><?!= ngay_tinh_hoa_don ?></p>
+            </div>
+        </div>
+
+        <!-- Invoice Details Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left table-auto">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-2 py-1 text-xs font-semibold text-gray-600">STT</th>
+                        <th class="px-2 py-1 text-xs font-semibold text-gray-600">Nội dung</th>
+                        <th class="px-2 py-1 text-xs font-semibold text-gray-600 text-right">Đơn giá</th>
+                        <th class="px-2 py-1 text-xs font-semibold text-gray-600 text-center">Số lượng</th>
+                        <th class="px-2 py-1 text-xs font-semibold text-gray-600 text-right">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <!-- Rental Fee -->
+                    <tr>
+                        <td class="px-2 py-1 font-medium text-sm">1</td>
+                        <td class="px-2 py-1 font-medium text-sm">Tiền nhà</td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_phong ?></td>
+                        <td class="px-2 py-1 text-center text-sm">1</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_phong ?></td>
+                    </tr>
+                    
+                    <!-- Electricity -->
+                    <tr>
+                        <td class="px-2 py-1 font-medium text-sm">2.1</td>
+                        <td class="px-2 py-1 text-sm">
+                            Tiền điện
+                            <span class="block text-xs text-gray-500">Số đầu: <?!= so_dien_dau ?>, Số cuối: <?!= so_dien_cuoi ?></span>
+                        </td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_dien ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= so_dien ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_dien ?></td>
+                    </tr>
+
+                    <!-- Water -->
+                    <tr>
+                        <td class="px-2 py-1 font-medium text-sm">2.2</td>
+                        <td class="px-2 py-1 text-sm">
+                            Tiền nước
+                            <span class="block text-xs text-gray-500">Số đầu: <?!= so_nuoc_dau ?>, Số cuối: <?!= so_nuoc_cuoi ?></span>
+                        </td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_nuoc ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= so_nuoc ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_nuoc ?></td>
+                    </tr>
+                    
+                    <!-- Services -->
+                    <tr class="bg-gray-50">
+                         <td class="px-2 py-1 font-bold text-sm" colspan="5">3. Dịch vụ</td>
+                    </tr>
+                    <tr>
+                        <td class="px-2 py-1 font-medium text-sm">3.1</td>
+                        <td class="px-2 py-1 text-sm"><?!= dich_vu_1 ?></td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_1_dg ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_1_sl ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_1_tt ?></td>
+                    </tr>
+                     <tr>
+                        <td class="px-2 py-1 font-medium text-sm">3.2</td>
+                        <td class="px-2 py-1 text-sm"><?!= dich_vu_2 ?></td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_2_dg ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_2_sl ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_2_tt ?></td>
+                    </tr>
+                     <tr>
+                        <td class="px-2 py-1 font-medium text-sm">3.3</td>
+                        <td class="px-2 py-1 text-sm"><?!= dich_vu_3 ?></td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_3_dg ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_3_sl ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_3_tt ?></td>
+                    </tr>
+                     <tr>
+                        <td class="px-2 py-1 font-medium text-sm">3.4</td>
+                        <td class="px-2 py-1 text-sm"><?!= dich_vu_4 ?></td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_4_dg ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_4_sl ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_4_tt ?></td>
+                    </tr>
+                     <tr>
+                        <td class="px-2 py-1 font-medium text-sm">3.5</td>
+                        <td class="px-2 py-1 text-sm"><?!= dich_vu_5 ?></td>
+                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_5_dg ?></td>
+                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_5_sl ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_5_tt ?></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Notes Section - moved above the combined summary/payment section -->
+        <div class="mt-5 border-t pt-3 text-xs text-gray-600">
+             <p><span class="font-semibold">Ghi chú:</span> <?!= ghi_chu ?></p>
+        </div>
+
+        <!-- Combined Summary and Payment Information Section -->
+        <div class="mt-6 flex flex-col md:flex-row justify-between items-start gap-6 summary-payment-section">
+            <!-- Summary Section -->
+            <div class="w-full md:w-1/2 summary-section">
+                <div class="flex justify-between py-1">
+                    <span class="text-sm text-gray-600">Tổng tiền dịch vụ:</span>
+                    <span class="font-medium text-gray-800 text-sm"><?!= tong_tien ?></span>
+                </div>
+                <div class="flex justify-between py-1">
+                    <span class="text-sm text-gray-600">Phát sinh khác:</span>
+                    <span class="font-medium text-gray-800 text-sm"><?!= phat_sinh_khac ?></span>
+                </div>
+                <div class="flex justify-between py-1">
+                    <span class="text-sm text-gray-600">Giảm trừ khác:</span>
+                    <span class="font-medium text-gray-800 text-sm"><?!= giam_tru_khac ?></span>
+                </div>
+                 <div class="flex justify-between py-1">
+                    <span class="text-sm text-gray-600">Nợ cũ:</span>
+                    <span class="font-medium text-gray-800 text-sm"><?!= no_cu ?></span>
+                </div>
+                <div class="flex justify-between py-2 border-t-2 border-gray-200">
+                    <span class="text-base font-bold text-gray-900">Tổng cộng:</span>
+                    <span class="text-base font-bold text-gray-900"><?!= tong_cong ?></span>
+                </div>
+                 <div class="flex justify-between py-1 text-blue-600">
+                    <span class="font-semibold text-sm">Đã thanh toán:</span>
+                    <span class="font-semibold text-sm"><?!= da_thanh_toan ?></span>
+                </div>
+                <div class="flex justify-between py-2 bg-red-100 rounded-lg px-3 mt-2">
+                    <span class="text-lg font-bold text-red-600">Còn lại:</span>
+                    <span class="text-lg font-bold text-red-600"><?!= con_lai ?></span>
+                </div>
+            </div>
+            
+            <!-- Payment Information -->
+            <div class="w-full md:w-1/2 mt-8 md:mt-0 md:border-t-0 pt-6 md:pt-0 payment-info-section">
+                <h3 class="text-lg font-semibold text-center text-gray-800 mb-3">Thông tin thanh toán</h3>
+                <div class="flex flex-col items-center justify-center gap-5">
+                    <!-- QR Code Placeholder -->
+                    <div>
+                        <img src="<?!= qr_code ?>" alt="QR Code" class="rounded-lg shadow-md w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+                        <p class="text-center text-xs text-gray-500 mt-1">Quét để chuyển khoản</p>
+                    </div>
+                    <!-- Bank Details -->
+                    <div class="space-y-2 text-center"> <!-- Centered bank details -->
+                        <div class="p-2 bg-blue-50 rounded-lg border border-blue-200 inline-block"> <!-- Inline-block to wrap content -->
+                            <p class="font-bold text-blue-800 text-sm">VPB</p>
+                            <p class="text-gray-700 text-sm">Tên tài khoản: <span class="font-semibold"><?!= chu_tai_khoan ?></span></p>
+                            <p class="text-gray-700 text-sm">Số tài khoản: <span class="font-semibold"><?!= so_tai_khoan ?></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
