@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỢP ĐỒNG CHO THUÊ CĂN HỘ DỊCH VỤ</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Nền xám nhạt */
+            line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc hơn */
+        }
+        .contract-container {
+            max-width: 21cm; /* Chiều rộng tối đa tương đương khổ A4 */
+            min-height: 29.7cm; /* Chiều cao tối thiểu tương đương khổ A4 */
+            margin: 2.5cm auto; /* Lề trên dưới 2.5cm, căn giữa theo chiều ngang */
+            padding: 2.5cm 2cm 2.5cm 3.5cm; /* Lề trên 2.5cm, phải 2cm, dưới 2.5cm, trái 3.5cm */
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước tổng thể */
+            position: relative; /* Để chứa số trang tuyệt đối */
+        }
+        .section-title {
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937; /* Màu xám đậm hơn cho tiêu đề */
+        }
+        .indent {
+            text-indent: 2rem;
+        }
+        /* Custom list with hyphens */
+        .list-hyphen {
+            list-style-type: none; /* Remove default bullet */
+            padding-left: 0;
+        }
+        .list-hyphen > li {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the hyphen */
+        }
+        .list-hyphen > li::before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Viền xám nhạt */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9; /* Nền xám nhạt hơn cho tiêu đề bảng */
+            font-weight: 600;
+            color: #334155; /* Màu xám trung bình cho văn bản tiêu đề bảng */
+        }
+
+        /* Styling cho số trang */
+        .page-number {
+            position: absolute;
+            bottom: 1.5cm; /* Khoảng cách từ đáy trang */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem; /* text-sm */
+            color: #64748b; /* Màu xám */
+            display: none; /* Mặc định ẩn trên màn hình */
+        }
+
+        /* CSS cho in ấn để tạo số trang */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact; /* Giữ màu sắc khi in */
+            }
+            .contract-container {
+                margin: 0;
+                padding: 2.5cm 2cm 2.5cm 3.5cm; /* Lề chuẩn khi in */
+                box-shadow: none;
+                border-radius: 0;
+                page-break-after: always; /* Tự động ngắt trang nếu nội dung vượt quá */
+            }
+
+            .page-number {
+                display: block; /* Hiển thị số trang khi in */
+                position: fixed; /* Cố định vị trí khi in */
+                bottom: 1.5cm;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 0.875rem;
+                color: #64748b;
+                content: counter(page); /* Lấy số trang hiện tại */
+            }
+
+            /* Thêm số trang vào footer khi in */
+            @page {
+                @bottom-center {
+                    content: "Trang " counter(page) " / " counter(pages);
+                    font-size: 0.875rem;
+                    color: #64748b;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contract-container">
+        <!-- Header Section -->
+        <div class="text-center mb-6">
+            <p class="text-sm font-bold uppercase">Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam</p>
+            <p class="text-sm italic">Độc Lập – Tự Do – Hạnh Phúc</p>
+            <p class="text-right mt-4 text-sm">
+                Ngày <span id="ngay_hd_day"></span> tháng <span id="ngay_hd_month"></span> năm <span id="ngay_hd_year"></span>
+            </p>
+        </div>
+
+        <!-- Contract Title -->
+        <h1 class="text-center text-2xl font-bold mb-8 uppercase text-blue-700">HỢP ĐỒNG CHO THUÊ CĂN HỘ DỊCH VỤ</h1>
+
+        <!-- Legal Basis -->
+        <div class="mb-6">
+            <ul class="list-hyphen text-sm">
+                <li class="italic">Căn cứ Bộ luật Dân sự số 91/2015/QH13 ngày 24/11/2015.</li>
+                <li class="italic">Căn cứ vào Luật Thương mại số 36/2005/QH11 ngày 14 tháng 06 năm 2005.</li>
+                <li class="italic">Căn cứ vào các quy định pháp luật có liên quan.</li>
+                <li class="italic">Căn cứ vào nhu cầu và sự thỏa thuận của các bên tham gia Hợp đồng.</li>
+            </ul>
+        </div>
+
+        <!-- Party A Section -->
+        <h2 class="text-lg font-bold mb-2">BÊN CHO THUÊ (gọi tắt là bên A)</h2>
+        <div class="text-sm mb-6">
+            <p>Ông: <span class="font-medium text-gray-700" id="dai_dien_ben_a"></span></p>
+            <p>Sinh ngày: <span class="font-medium text-gray-700" id="ngay_sinh_ben_a"></span></p>
+            <p>Căn cước công dân số: <span class="font-medium text-gray-700" id="cccd_ben_a"></span> do <span class="font-medium text-gray-700" id="noi_cap_ben_a"></span> cấp ngày <span class="font-medium text-gray-700" id="ngay_cap_ben_a"></span>.</p>
+            <p>Địa chỉ: <span class="font-medium text-gray-700" id="dia_chi_ben_a"></span></p>
+            <p>Điện thoại: <span class="font-medium text-gray-700" id="dien_thoai_ben_a"></span></p>
+        </div>
+
+        <!-- Party B Section -->
+        <h2 class="text-lg font-bold mb-2">BÊN THUÊ (gọi tắt là bên B)</h2>
+        <div class="text-sm mb-6">
+            <p>Ông/Bà: <span class="font-medium text-gray-700" id="dai_dien_ben_b"></span> Quốc tịch: <span class="font-medium text-gray-700" id="quoc_tich_ben_b"></span></p>
+            <p>Điện thoại: <span class="font-medium text-gray-700" id="dien_thoai_ben_b"></span></p>
+            <p>Địa chỉ thường trú: <span class="font-medium text-gray-700" id="dia_chi_ben_b"></span></p>
+            <p>Ngày sinh: <span class="font-medium text-gray-700" id="ngay_sinh_ben_b"></span></p>
+            <p>CCCD/Passport: <span class="font-medium text-gray-700" id="cccd_ben_b"></span> Cấp ngày <span class="font-medium text-gray-700" id="ngay_cap_ben_b"></span> tại <span class="font-medium text-gray-700" id="noi_cap_ben_b"></span></p>
+        </div>
+        <p class="text-sm mb-6">Cùng thỏa thuận giao kết hợp đồng cho thuê với các nội dung sau đây :</p>
+
+        <!-- Điều 1: KHÔNG GIAN CHO THUÊ -->
+        <h2 class="text-lg section-title">ĐIỀU 1 : KHÔNG GIAN CHO THUÊ</h2>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Bên A đồng ý cho bên B thuê (Mã phòng) <span class="font-medium text-gray-700" id="phong_tro"></span></li>
+            <li>Trong căn nhà <span class="font-medium text-gray-700" id="nha_tro"></span></li>
+            <li>Thời hạn hợp đồng là: <span class="font-medium text-gray-700" id="loai_hd"></span> tháng.</li>
+            <li>Hợp đồng có giá trị từ ngày <span class="font-medium text-gray-700" id="tu_ngay"></span> đến ngày <span class="font-medium text-gray-700" id="den_ngay"></span></li>
+            <li>Các trang thiết bị kèm theo chi tiết liệt kê trong BIÊN BẢN BÀN GIAO PHÒNG* đính kèm.</li>
+        </ul>
+
+        <!-- Điều 2: TIỀN THUÊ -->
+        <h2 class="text-lg section-title">ĐIỀU 2 : TIỀN THUÊ</h2>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Tiền thuê hàng tháng là: <span class="font-medium text-gray-700" id="tien_thue"></span> VND</li>
+            <li>(Bằng chữ: <span class="font-medium text-gray-700" id="bang_chu_tien_thue"></span>)</li>
+        </ul>
+
+        <!-- Điều 3: TIỀN ĐẶT CỌC -->
+        <h2 class="text-lg section-title">ĐIỀU 3 : TIỀN ĐẶT CỌC</h2>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Bên B đặt cọc số tiền <span class="font-medium text-gray-700" id="tien_coc"></span> VND</li>
+            <li>(Bằng chữ: <span class="font-medium text-gray-700" id="bang_chu_tien_coc"></span>)</li>
+            <li>Số tiền này sẽ trả lại cho bên B khi kết thúc hợp đồng và sau khi bên B đã thanh toán hết tiền điện, nước, internet, truyền hình cáp và các dịch vụ khác kèm theo mà bên B đã sử dụng hoặc bồi thường, sữa chữa những hư hại cơ sở vật chất trong nhà.</li>
+            <li>Bên A trả tiền cọc cho bên B kể từ khi bên B bàn giao lại căn phòng với đầy đủ các trang thiết bị đang hoạt động tốt và hiện trạng căn phòng như lúc nhận phòng và được xác nhận số tiền cọc còn lại khi bàn giao phòng. (Trường hợp khi Bên B bàn giao lại phòng không như hiện trạng ban đầu thì Bên B phải chịu hoàn toàn chi phí khắc phục, số tiền này sẽ trừ vào tiền cọc.)</li>
+        </ul>
+
+        <h3 class="font-semibold text-base mb-2">CÁC TRƯỜNG HỢP THAY ĐỔI TIỀN CỌC</h3>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Trường hợp bên A lấy lại phòng trước thời hạn hợp đồng không phải nguyên nhân do khách thuê vi phạm hoặc không phải nguyên nhân bất khả kháng thì phải trả gấp đôi số tiền cọc mà bên B đã nộp ban đầu.</li>
+            <li>Trường hợp bên B có những vi phạm trong quá trình ở hoặc đóng tiền trễ thì số tiền đặt cọc này sẽ được dùng để trừ những khoản tiền phạt theo các quy định bên dưới trong hợp đồng.</li>
+            <li>Trường hợp bên B đi trước hạn hợp đồng thì coi như bên B đơn phương chấm dứt hợp đồng và bên A không có trách nhiệm hoàn lại số tiền đặt cọc bên B đã đặt cọc khi ký hợp đồng.</li>
+        </ul>
+
+        <!-- Điều 4: ĐĂNG KÝ DỊCH VỤ -->
+        <h2 class="text-lg section-title">Điều 4 : ĐĂNG KÝ DỊCH VỤ</h2>
+        <p class="text-sm mb-4">Bên B đăng ký sử dụng các dịch vụ sau trong suốt thời gian hợp đồng.</p>
+        <div class="overflow-x-auto mb-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TT</th>
+                        <th>Dịch vụ</th>
+                        <th>ĐVT</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Điện</td>
+                        <td><<[Điện].[ĐVT]>></td>
+                        <td><<TEXT([Điện].[Đơn giá])>></td>
+                        <td>Theo thực tế</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Nước</td>
+                        <td><<[Nước].[ĐVT]>></td>
+                        <td><<TEXT([Nước].[Đơn giá])>></td>
+                        <td>Theo thực tế</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><<[Dịch vụ 1].[Tên dịch vụ]>></td>
+                        <td><<[Dịch vụ 1].[ĐVT]>></td>
+                        <td><<TEXT([Dịch vụ 1].[Đơn giá])>></td>
+                        <td><<[SL dịch vụ 1]>></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><<[Dịch vụ 2].[Tên dịch vụ]>></td>
+                        <td><<[Dịch vụ 2].[ĐVT]>></td>
+                        <td><<TEXT([Dịch vụ 2].[Đơn giá])>></td>
+                        <td><<[SL dịch vụ 2]>></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><<[Dịch vụ 3].[Tên dịch vụ]>></td>
+                        <td><<[Dịch vụ 3].[ĐVT]>></td>
+                        <td><<TEXT([Dịch vụ 3].[Đơn giá])>></td>
+                        <td><<[SL dịch vụ 3]>></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><<[Dịch vụ 4].[Tên dịch vụ]>></td>
+                        <td><<[Dịch vụ 4].[ĐVT]>></td>
+                        <td><<TEXT([Dịch vụ 4].[Đơn giá])>></td>
+                        <td><<[SL dịch vụ 4]>></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><<[Dịch vụ 5].[Tên dịch vụ]>></td>
+                        <td><<[Dịch vụ 5].[ĐVT]>></td>
+                        <td><<TEXT([Dịch vụ 5].[Đơn giá])>></td>
+                        <td><<[SL dịch vụ 5]>></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Điều 5: QUY TRÌNH THANH TOÁN TIỀN THUÊ -->
+        <h2 class="text-lg section-title">Điều 5 : QUY TRÌNH THANH TOÁN TIỀN THUÊ</h2>
+        <ul class="list-decimal list-inside text-sm mb-6">
+            <li><span class="font-bold">THỜI GIAN GỬI HÓA ĐƠN:</span> Vào ngày 01 hàng tháng bên A gửi hóa đơn tiền phòng cho Bên B. Trong trường hợp đến thời gian nêu trên mà khách hàng vẫn chưa nhận được hóa đơn thông báo vui lòng liên hệ hotline bên A để được kiểm tra lại.</li>
+            <li><span class="font-bold">THỜI HẠN THANH TOÁN:</span>
+                <ul class="list-hyphen ml-4">
+                    <li>Bên B nhận được hóa đơn vui lòng kiểm tra và thu xếp thanh toán vào hạn cuối là ngày 10 hàng tháng.</li>
+                    <li>Nếu Bên B chậm thanh toán cho Bên A sau ngày 10 hàng tháng thì phải chịu phí 50.000đ/ngày</li>
+                </ul>
+            </li>
+            <li><span class="font-bold">HÌNH THỨC THANH TOÁN:</span>
+                <ul class="list-hyphen ml-4">
+                    <li>Thanh toán tiền mặt hoặc chuyển khoản vào tài khoản của Bên A.
+                        <ul class="list-none ml-4">
+                            <li>Tên tài khoản: <span class="font-medium text-gray-700" id="ten_tai_khoan"></span></li>
+                            <li>Số tài khoản: <span class="font-medium text-gray-700" id="so_tai_khoan"></span></li>
+                            <li>Ngân hàng: <span class="font-medium text-gray-700" id="ngan_hang"></span></li>
+                        </ul>
+                    </li>
+                    <li>Ngày 01 hàng tháng Bên A sẽ cử nhân viên trực tiếp đế thu tiền Bên B tại phòng. Bộ phận vận hành sẽ trực tiếp liên hệ với Bên B để hẹn giờ thu tiền phù hợp.</li>
+                </ul>
+            </li>
+            <li><span class="font-bold">TRƯỜNG HỢP BÊN B ĐÓNG TIỀN TRỄ:</span>
+                <ul class="list-hyphen ml-4">
+                    <li>Quá hạn thanh toán 05 ngày bên A sẽ cho đối tác quản lý tiến hành tạm ngưng cung cấp dịch vụ ( điện, nước...)</li>
+                    <li>Trường hợp quá hạn thanh toán 7 ngày, nếu bên B vẫn chưa thanh toán thì căn phòng sẽ được thu hồi đồng thời hợp đồng thuê phòng của bên B với bên A chính thức hết hiệu lực và bên B sẽ bị mất toàn bộ số tiền đã đặt cọc. Bên cạnh đó sau khi lấy lại phòng bên A sẽ không chịu bất kỳ trách nhiệm gì với đồ đạc trong phòng của bên B, đồng thời bên B phải bồi thường các thiệt hại phát sinh ( nếu có) cho bên A theo quy định của Pháp luật.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Điều 6: BÊN B CAM KẾT -->
+        <h2 class="text-lg section-title">ĐIỀU 6 : BÊN B CAM KẾT :</h2>
+        <p class="text-sm mb-4">Số người đăng ký ở là <span class="font-medium text-gray-700" id="so_nguoi"></span> người.</p>
+        <h3 class="font-semibold text-base mb-2">Danh sách người ở:</h3>
+        <div class="overflow-x-auto mb-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TT</th>
+                        <th>Họ và tên</th>
+                        <th>CCCD/Passport</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><!-- Placeholder for TT --></td>
+                        <td><!-- Placeholder for Họ và tên --></td>
+                        <td><!-- Placeholder for CCCD / Passport --></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Không đưa thêm quá số người đã đăng ký.</li>
+            <li>Tự bảo quản tài sản cá nhân và tài sản chung.</li>
+            <li>Tuân thủ quy định chung của khu nhà.</li>
+            <li>Không được thường xuyên dẫn khách lạ vào nhà.</li>
+            <li>Không để bạn bè ở lại sau 22h hoặc phải thông báo cho Bên A biết.</li>
+            <li>Được sang nhượng lại cho bên thứ ba nhưng phải có sự đồng ý của Bên A.</li>
+            <li>Sử dụng phòng theo đúng mục đích đã ký hợp đồng, có trách nhiệm bảo quản tốt tài sản, trang thiết bị trong phòng. Không được đập phá, tháo dỡ hoặc chuyển dịch đi nơi khác, không được thay đổi cấu trúc, không đục tường, trổ cửa, phá dỡ hoặc xây cất thêm.</li>
+            <li>Mọi thay đổi, hư hỏng, mất mát, vệ sinh bên B phải chịu trách nhiệm sửa chữa, khắc phục như hiện trạng để bên A kiểm tra đồng ý xác nhận thì bên B mới hoàn tất được việc giao trả không gian thuê và được nhận lại số tiền đã đặt cọc.</li>
+            <li>Bên B chủ động khai báo thông tin tạm trú, đồng thời chịu mọi tránh nhiệm theo quy định của pháp luật về vấn đề tạm trú, tạm vắng nếu có.</li>
+        </ul>
+        <p class="text-sm mb-6 indent">Trường hợp nếu Bên B vi phạm về những điều khoản đã cam kết như trên, Bên A được phép đơn phương chấm dứt hợp đồng và Bên B sẽ bị mất toàn bộ số tiền đã đặt cọc.</p>
+
+        <!-- Điều 7: QUY ĐỊNH ĐỂ XE VÀ TRÁCH NHIỆM SỬ DỤNG KHÓA VÂN TAY -->
+        <h2 class="text-lg section-title">ĐIỀU 7 : QUY ĐỊNH ĐỂ XE VÀ TRÁCH NHIỆM SỬ DỤNG KHÓA VÂN TAY:</h2>
+        <ul class="list-decimal list-inside text-sm mb-6">
+            <li><span class="font-bold">XE:</span>
+                <p class="mb-2">Số xe được để trong nhà là <span class="font-medium text-gray-700" id="so_xe"></span> xe</p>
+                <div class="overflow-x-auto mb-4">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TT</th>
+                                <th>Họ và tên</th>
+                                <th>Loại xe</th>
+                                <th>Biển số</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><!-- Placeholder for TT --></td>
+                                <td><!-- Placeholder for Họ và tên --></td>
+                                <td><!-- Placeholder for Loại xe --></td>
+                                <td><!-- Placeholder for Biển số --></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="list-hyphen ml-4">
+                    <li>Quý khách phải tự bảo quản xe</li>
+                    <li>Xe của bạn bè hoặc người thân đến chơi thì được để nhờ trước 22 giờ, sau 22 giờ xe của bạn bè hoặc người thân PHẢI gửi bên ngoài.</li>
+                </ul>
+                <p class="text-sm mt-2 ml-4">Trường hợp bạn bè hoặc người thân để xe lại sau 22 giờ tại tòa nhà, nếu phát hiện trừ 100.000đ/lần vào tiền đặt cọc của Bên B.</p>
+            </li>
+            <li><span class="font-bold">KHÓA VÂN TAY NHÀ XE:</span>
+                <ul class="list-hyphen ml-4">
+                    <li>Để đảm bảo an toàn tài sản chung Bên B ra - vào phải đóng cửa cẩn thận. Trường hợp, Bên B để người lạ vào mà dẫn đến mất mát tài sản thì bên B phải chịu hoàn toàn trách nhiệm.</li>
+                    <li>Trường hợp Bên B mở cửa mà không đóng lại nếu phát hiện:
+                        <ul class="list-hyphen ml-4">
+                            <li>+) Lần 1 : Bên A sẽ nhắn tin cho Bên B đồng thời trừ 500.000 VND vào tiền đặt cọc phòng của bên B.</li>
+                            <li>+) Lần 2 : Bên A có quyền đơn phương chấm dứt hợp đồng và bên B sẽ bị mất toàn bộ số tiền đã đặt cọc đồng thời phải trao trả phòng cho bên A trong 3 ngày.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Điều 8: QUY ĐỊNH VỀ BẢO TRÌ – SỬA CHỮA -->
+        <h2 class="text-lg section-title">ĐIỀU 8 : QUY ĐỊNH VỀ BẢO TRÌ – SỬA CHỮA:</h2>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Bên B phải có trách nhiệm bảo quản các thiết bị trong không gian thuê và trong quá trình sử dụng các thiết bị trên nếu có bất kỳ hư hỏng gì thì Bên B phải báo ngay cho Bên A để thẩm định và sửa chữa.</li>
+            <li>Ngay sau khi ký hợp đồng này, bên A sẽ bàn giao cho bên B một không gian thuê với các thiết bị đã được kiểm tra và không gian thuê đã vệ sinh sạch sẽ và được bên B xác nhận tình trạng hoạt động.</li>
+        </ul>
+
+        <!-- Điều 9: CAM KẾT CHUNG -->
+        <h2 class="text-lg section-title">ĐIỀU 9 : CAM KẾT CHUNG</h2>
+        <ul class="list-hyphen text-sm mb-6">
+            <li>Hai bên nhất trí thỏa thuận trên và cam kết thi hành đúng quyền và nghĩa vụ hợp đồng. Nếu bên nào vi phạm sẽ phải chịu phạt vi phạm và bồi thường theo quy định Pháp luật.</li>
+            <li>Hợp đồng lập thành 2 bản mỗi bên giữ 1 bản và có giá trị pháp lý ngang nhau.</li>
+        </ul>
+
+        <!-- Signatures Section -->
+        <div class="flex justify-around text-center mt-12 text-sm font-semibold">
+            <div class="w-1/2">
+                <p>BÊN CHO THUÊ (BÊN A)</p>
+                <p>(Ký và ghi rõ hõ tên)</p>
+                <p class="mt-20">_________________________</p>
+            </div>
+            <div class="w-1/2">
+                <p>BÊN THUÊ (BÊN B)</p>
+                <p>(Ký và ghi rõ hõ tên)</p>
+                <p class="mt-20">_________________________</p>
+            </div>
+        </div>
+
+        <!-- Page Number (visible for print) -->
+        <div class="page-number"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+
+            // Mapping of URL parameters to HTML element IDs
+            const dataMap = {
+                // Date of contract
+                'ngay_hd': {
+                    element_id: 'ngay_hd', // Special handling for day, month, year
+                    format: 'date'
+                },
+
+                // Party A details
+                'dai_dien_ben_a': 'dai_dien_ben_a',
+                'ngay_sinh_ben_a': 'ngay_sinh_ben_a',
+                'cccd_ben_a': 'cccd_ben_a',
+                'noi_cap_ben_a': 'noi_cap_ben_a',
+                'ngay_cap_ben_a': 'ngay_cap_ben_a',
+                'dia_chi_ben_a': 'dia_chi_ben_a',
+                'dien_thoai_ben_a': 'dien_thoai_ben_a',
+
+                // Party B details
+                'dai_dien_ben_b': 'dai_dien_ben_b',
+                'quoc_tich_ben_b': 'quoc_tich_ben_b',
+                'dien_thoai_ben_b': 'dien_thoai_ben_b',
+                'dia_chi_ben_b': 'dia_chi_ben_b',
+                'ngay_sinh_ben_b': 'ngay_sinh_ben_b',
+                'cccd_ben_b': 'cccd_ben_b',
+                'ngay_cap_ben_b': 'ngay_cap_ben_b',
+                'noi_cap_ben_b': 'noi_cap_ben_b',
+
+                // Contract details
+                'phong_tro': 'phong_tro',
+                'nha_tro': 'nha_tro',
+                'loai_hd': 'loai_hd',
+                'tu_ngay': 'tu_ngay',
+                'den_ngay': 'den_ngay',
+
+                // Rental amount
+                'tien_thue': 'tien_thue',
+                'bang_chu_tien_thue': 'bang_chu_tien_thue',
+
+                // Deposit amount
+                'tien_coc': 'tien_coc',
+                'bang_chu_tien_coc': 'bang_chu_tien_coc',
+
+                // Payment details
+                'ten_tai_khoan': 'ten_tai_khoan',
+                'so_tai_khoan': 'so_tai_khoan',
+                'ngan_hang': 'ngan_hang',
+
+                // Occupancy and Vehicle details
+                'so_nguoi': 'so_nguoi',
+                'so_xe': 'so_xe'
+            };
+
+            for (const paramName in dataMap) {
+                const paramValue = params.get(paramName);
+                if (paramValue) {
+                    const target = dataMap[paramName];
+                    if (typeof target === 'object' && target.format === 'date') {
+                        // Special handling for ngay_hd (date)
+                        const [day, month, year] = paramValue.split('/');
+                        const dayElement = document.getElementById(target.element_id + '_day');
+                        const monthElement = document.getElementById(target.element_id + '_month');
+                        const yearElement = document.getElementById(target.element_id + '_year');
+
+                        if (dayElement) dayElement.textContent = day || '';
+                        if (monthElement) monthElement.textContent = month || '';
+                        if (yearElement) yearElement.textContent = year || '';
+                    } else {
+                        // General handling for other parameters
+                        const element = document.getElementById(target);
+                        if (element) {
+                            element.textContent = decodeURIComponent(paramValue.replace(/\+/g, ' '));
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
