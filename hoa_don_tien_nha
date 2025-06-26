@@ -41,19 +41,19 @@
                 font-size: 0.75em !important; /* Consistent smaller text */
             }
             .invoice-container .text-xs {
-                 font-size: 0.6em !important; /* Even smaller for very small text */
+                    font-size: 0.6em !important; /* Even smaller for very small text */
             }
             .invoice-container .text-sm {
-                 font-size: 0.7em !important; /* Smaller for text-sm */
+                    font-size: 0.7em !important; /* Smaller for text-sm */
             }
             .invoice-container .text-base {
-                 font-size: 0.75em !important; /* Smaller for text-base */
+                    font-size: 0.75em !important; /* Smaller for text-base */
             }
             .invoice-container .text-lg {
-                 font-size: 0.8em !important; /* Smaller for text-lg */
+                    font-size: 0.8em !important; /* Smaller for text-lg */
             }
             .invoice-container .text-xl {
-                 font-size: 0.9em !important; /* Smaller for text-xl */
+                    font-size: 0.9em !important; /* Smaller for text-xl */
             }
 
             /* Adjust horizontal layout for print */
@@ -85,26 +85,26 @@
         <!-- Header Section -->
         <header class="text-center mb-5">
             <h1 class="text-2xl font-bold text-gray-800">HÓA ĐƠN TIỀN PHÒNG</h1>
-            <p class="text-sm text-gray-500"><?!= ky_hoa_don ?></p>
+            <p class="text-sm text-gray-500" id="ky_hoa_don">-- Kỳ hóa đơn --</p>
         </header>
         
         <!-- Tenant and Room Information -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-5 border-b pb-3">
             <div>
                 <h2 class="text-xs font-semibold text-gray-500">Khách thuê</h2>
-                <p class="text-base font-medium text-gray-800"><?!= khach_thue ?></p>
+                <p class="text-base font-medium text-gray-800" id="khach_thue">-- Khách thuê --</p>
             </div>
             <div>
                 <h2 class="text-xs font-semibold text-gray-500">Nhà trọ</h2>
-                <p class="text-base font-medium text-gray-800"><?!= nha_tro ?></p>
+                <p class="text-base font-medium text-gray-800" id="nha_tro">-- Nhà trọ --</p>
             </div>
             <div>
                 <h2 class="text-xs font-semibold text-gray-500">Phòng trọ</h2>
-                <p class="text-base font-medium text-gray-800"><?!= phong_tro ?></p>
+                <p class="text-base font-medium text-gray-800" id="phong_tro">-- Phòng trọ --</p>
             </div>
             <div>
                 <h2 class="text-xs font-semibold text-gray-500">Ngày tính hóa đơn</h2>
-                <p class="text-base font-medium text-gray-800"><?!= ngay_tinh_hoa_don ?></p>
+                <p class="text-base font-medium text-gray-800" id="ngay_tinh_hoa_don">-- Ngày tính --</p>
             </div>
         </div>
 
@@ -125,9 +125,9 @@
                     <tr>
                         <td class="px-2 py-1 font-medium text-sm">1</td>
                         <td class="px-2 py-1 font-medium text-sm">Tiền nhà</td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_phong ?></td>
+                        <td class="px-2 py-1 text-right text-sm" id="don_gia_phong">0</td>
                         <td class="px-2 py-1 text-center text-sm">1</td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_phong ?></td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="thanh_tien_phong">0</td>
                     </tr>
                     
                     <!-- Electricity -->
@@ -135,11 +135,11 @@
                         <td class="px-2 py-1 font-medium text-sm">2.1</td>
                         <td class="px-2 py-1 text-sm">
                             Tiền điện
-                            <span class="block text-xs text-gray-500">Số đầu: <?!= so_dien_dau ?>, Số cuối: <?!= so_dien_cuoi ?></span>
+                            <span class="block text-xs text-gray-500">Số đầu: <span id="so_dien_dau">0</span>, Số cuối: <span id="so_dien_cuoi">0</span></span>
                         </td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_dien ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= so_dien ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_dien ?></td>
+                        <td class="px-2 py-1 text-right text-sm" id="don_gia_dien">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="so_dien">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="thanh_tien_dien">0</td>
                     </tr>
 
                     <!-- Water -->
@@ -147,51 +147,51 @@
                         <td class="px-2 py-1 font-medium text-sm">2.2</td>
                         <td class="px-2 py-1 text-sm">
                             Tiền nước
-                            <span class="block text-xs text-gray-500">Số đầu: <?!= so_nuoc_dau ?>, Số cuối: <?!= so_nuoc_cuoi ?></span>
+                            <span class="block text-xs text-gray-500">Số đầu: <span id="so_nuoc_dau">0</span>, Số cuối: <span id="so_nuoc_cuoi">0</span></span>
                         </td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= don_gia_nuoc ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= so_nuoc ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= thanh_tien_nuoc ?></td>
+                        <td class="px-2 py-1 text-right text-sm" id="don_gia_nuoc">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="so_nuoc">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="thanh_tien_nuoc">0</td>
                     </tr>
                     
                     <!-- Services -->
                     <tr class="bg-gray-50">
-                         <td class="px-2 py-1 font-bold text-sm" colspan="5">3. Dịch vụ</td>
+                            <td class="px-2 py-1 font-bold text-sm" colspan="5">3. Dịch vụ</td>
                     </tr>
                     <tr>
                         <td class="px-2 py-1 font-medium text-sm">3.1</td>
-                        <td class="px-2 py-1 text-sm"><?!= dich_vu_1 ?></td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_1_dg ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_1_sl ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_1_tt ?></td>
+                        <td class="px-2 py-1 text-sm" id="dich_vu_1">-- Dịch vụ 1 --</td>
+                        <td class="px-2 py-1 text-right text-sm" id="dich_vu_1_dg">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="dich_vu_1_sl">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="dich_vu_1_tt">0</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="px-2 py-1 font-medium text-sm">3.2</td>
-                        <td class="px-2 py-1 text-sm"><?!= dich_vu_2 ?></td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_2_dg ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_2_sl ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_2_tt ?></td>
+                        <td class="px-2 py-1 text-sm" id="dich_vu_2">-- Dịch vụ 2 --</td>
+                        <td class="px-2 py-1 text-right text-sm" id="dich_vu_2_dg">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="dich_vu_2_sl">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="dich_vu_2_tt">0</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="px-2 py-1 font-medium text-sm">3.3</td>
-                        <td class="px-2 py-1 text-sm"><?!= dich_vu_3 ?></td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_3_dg ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_3_sl ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_3_tt ?></td>
+                        <td class="px-2 py-1 text-sm" id="dich_vu_3">-- Dịch vụ 3 --</td>
+                        <td class="px-2 py-1 text-right text-sm" id="dich_vu_3_dg">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="dich_vu_3_sl">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="dich_vu_3_tt">0</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="px-2 py-1 font-medium text-sm">3.4</td>
-                        <td class="px-2 py-1 text-sm"><?!= dich_vu_4 ?></td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_4_dg ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_4_sl ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_4_tt ?></td>
+                        <td class="px-2 py-1 text-sm" id="dich_vu_4">-- Dịch vụ 4 --</td>
+                        <td class="px-2 py-1 text-right text-sm" id="dich_vu_4_dg">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="dich_vu_4_sl">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="dich_vu_4_tt">0</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="px-2 py-1 font-medium text-sm">3.5</td>
-                        <td class="px-2 py-1 text-sm"><?!= dich_vu_5 ?></td>
-                        <td class="px-2 py-1 text-right text-sm"><?!= dich_vu_5_dg ?></td>
-                        <td class="px-2 py-1 text-center text-sm"><?!= dich_vu_5_sl ?></td>
-                        <td class="px-2 py-1 text-right font-medium text-sm"><?!= dich_vu_5_tt ?></td>
+                        <td class="px-2 py-1 text-sm" id="dich_vu_5">-- Dịch vụ 5 --</td>
+                        <td class="px-2 py-1 text-right text-sm" id="dich_vu_5_dg">0</td>
+                        <td class="px-2 py-1 text-center text-sm" id="dich_vu_5_sl">0</td>
+                        <td class="px-2 py-1 text-right font-medium text-sm" id="dich_vu_5_tt">0</td>
                     </tr>
 
                 </tbody>
@@ -200,7 +200,7 @@
 
         <!-- Notes Section - moved above the combined summary/payment section -->
         <div class="mt-5 border-t pt-3 text-xs text-gray-600">
-             <p><span class="font-semibold">Ghi chú:</span> <?!= ghi_chu ?></p>
+             <p><span class="font-semibold">Ghi chú:</span> <span id="ghi_chu">-- Ghi chú --</span></p>
         </div>
 
         <!-- Combined Summary and Payment Information Section -->
@@ -209,31 +209,31 @@
             <div class="w-full md:w-1/2 summary-section">
                 <div class="flex justify-between py-1">
                     <span class="text-sm text-gray-600">Tổng tiền dịch vụ:</span>
-                    <span class="font-medium text-gray-800 text-sm"><?!= tong_tien ?></span>
+                    <span class="font-medium text-gray-800 text-sm" id="tong_tien">0</span>
                 </div>
                 <div class="flex justify-between py-1">
                     <span class="text-sm text-gray-600">Phát sinh khác:</span>
-                    <span class="font-medium text-gray-800 text-sm"><?!= phat_sinh_khac ?></span>
+                    <span class="font-medium text-gray-800 text-sm" id="phat_sinh_khac">0</span>
                 </div>
                 <div class="flex justify-between py-1">
                     <span class="text-sm text-gray-600">Giảm trừ khác:</span>
-                    <span class="font-medium text-gray-800 text-sm"><?!= giam_tru_khac ?></span>
+                    <span class="font-medium text-gray-800 text-sm" id="giam_tru_khac">0</span>
                 </div>
                  <div class="flex justify-between py-1">
                     <span class="text-sm text-gray-600">Nợ cũ:</span>
-                    <span class="font-medium text-gray-800 text-sm"><?!= no_cu ?></span>
+                    <span class="font-medium text-gray-800 text-sm" id="no_cu">0</span>
                 </div>
                 <div class="flex justify-between py-2 border-t-2 border-gray-200">
                     <span class="text-base font-bold text-gray-900">Tổng cộng:</span>
-                    <span class="text-base font-bold text-gray-900"><?!= tong_cong ?></span>
+                    <span class="text-base font-bold text-gray-900" id="tong_cong">0</span>
                 </div>
                  <div class="flex justify-between py-1 text-blue-600">
                     <span class="font-semibold text-sm">Đã thanh toán:</span>
-                    <span class="font-semibold text-sm"><?!= da_thanh_toan ?></span>
+                    <span class="font-semibold text-sm" id="da_thanh_toan">0</span>
                 </div>
                 <div class="flex justify-between py-2 bg-red-100 rounded-lg px-3 mt-2">
                     <span class="text-lg font-bold text-red-600">Còn lại:</span>
-                    <span class="text-lg font-bold text-red-600"><?!= con_lai ?></span>
+                    <span class="text-lg font-bold text-red-600" id="con_lai">0</span>
                 </div>
             </div>
             
@@ -243,15 +243,15 @@
                 <div class="flex flex-col items-center justify-center gap-5">
                     <!-- QR Code Placeholder -->
                     <div>
-                        <img src="<?!= qr_code ?>" alt="QR Code" class="rounded-lg shadow-md w-20 h-20 sm:w-24 sm:h-24 mx-auto">
+                        <img src="https://placehold.co/100x100/A0B0C0/FFFFFF?text=QR+Code" alt="QR Code" class="rounded-lg shadow-md w-20 h-20 sm:w-24 sm:h-24 mx-auto" id="qr_code">
                         <p class="text-center text-xs text-gray-500 mt-1">Quét để chuyển khoản</p>
                     </div>
                     <!-- Bank Details -->
                     <div class="space-y-2 text-center"> <!-- Centered bank details -->
                         <div class="p-2 bg-blue-50 rounded-lg border border-blue-200 inline-block"> <!-- Inline-block to wrap content -->
                             <p class="font-bold text-blue-800 text-sm">VPB</p>
-                            <p class="text-gray-700 text-sm">Tên tài khoản: <span class="font-semibold"><?!= chu_tai_khoan ?></span></p>
-                            <p class="text-gray-700 text-sm">Số tài khoản: <span class="font-semibold"><?!= so_tai_khoan ?></span></p>
+                            <p class="text-gray-700 text-sm">Tên tài khoản: <span class="font-semibold" id="chu_tai_khoan">-- Chủ tài khoản --</span></p>
+                            <p class="text-gray-700 text-sm">Số tài khoản: <span class="font-semibold" id="so_tai_khoan">-- Số tài khoản --</span></p>
                         </div>
                     </div>
                 </div>
@@ -259,5 +259,137 @@
         </div>
     </div>
 
+    <script>
+        // Function to format numbers as Vietnamese currency
+        function formatCurrencyVND(amount) {
+            if (typeof amount !== 'number' && typeof amount !== 'string') {
+                return ''; // Handle null, undefined, etc.
+            }
+            const num = parseFloat(amount);
+            if (isNaN(num)) {
+                return String(amount); // Return as is if not a valid number
+            }
+            return num.toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = {};
+            // Get the URL search string (e.g., "?name=John&age=30")
+            const queryString = window.location.search;
+            // Create a URLSearchParams object to easily parse the query string
+            const urlParams = new URLSearchParams(queryString);
+            
+            // Iterate over all parameters and store them in the params object
+            for (const [key, value] of urlParams.entries()) {
+                params[key] = value;
+            }
+            return params;
+        }
+
+        // This function will populate the HTML elements with data from URL parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = getUrlParams();
+
+            // Define the IDs of elements to be populated with their default values
+            // Numbers that should be formatted as currency are explicitly marked
+            const dataMap = {
+                // Header
+                'ky_hoa_don': { id: 'ky_hoa_don', default: 'Tháng X, Năm YYYY' },
+
+                // Tenant and Room Information
+                'khach_thue': { id: 'khach_thue', default: 'Nguyễn Văn A' },
+                'nha_tro': { id: 'nha_tro', default: 'Nhà trọ ABC' },
+                'phong_tro': { id: 'phong_tro', default: 'Phòng 101' },
+                'ngay_tinh_hoa_don': { id: 'ngay_tinh_hoa_don', default: new Date().toLocaleDateString('vi-VN') },
+
+                // Invoice Details Table - Rental Fee
+                'don_gia_phong': { id: 'don_gia_phong', default: 0, format: 'currency' },
+                'thanh_tien_phong': { id: 'thanh_tien_phong', default: 0, format: 'currency' },
+
+                // Invoice Details Table - Electricity
+                'so_dien_dau': { id: 'so_dien_dau', default: 0 },
+                'so_dien_cuoi': { id: 'so_dien_cuoi', default: 0 },
+                'don_gia_dien': { id: 'don_gia_dien', default: 0, format: 'currency' },
+                'so_dien': { id: 'so_dien', default: 0 }, // Not currency
+                'thanh_tien_dien': { id: 'thanh_tien_dien', default: 0, format: 'currency' },
+
+                // Invoice Details Table - Water
+                'so_nuoc_dau': { id: 'so_nuoc_dau', default: 0 },
+                'so_nuoc_cuoi': { id: 'so_nuoc_cuoi', default: 0 },
+                'don_gia_nuoc': { id: 'don_gia_nuoc', default: 0, format: 'currency' },
+                'so_nuoc': { id: 'so_nuoc', default: 0 }, // Not currency
+                'thanh_tien_nuoc': { id: 'thanh_tien_nuoc', default: 0, format: 'currency' },
+
+                // Invoice Details Table - Services
+                'dich_vu_1': { id: 'dich_vu_1', default: 'Dịch vụ Internet' },
+                'dich_vu_1_dg': { id: 'dich_vu_1_dg', default: 0, format: 'currency' },
+                'dich_vu_1_sl': { id: 'dich_vu_1_sl', default: 0 },
+                'dich_vu_1_tt': { id: 'dich_vu_1_tt', default: 0, format: 'currency' },
+
+                'dich_vu_2': { id: 'dich_vu_2', default: 'Dịch vụ vệ sinh' },
+                'dich_vu_2_dg': { id: 'dich_vu_2_dg', default: 0, format: 'currency' },
+                'dich_vu_2_sl': { id: 'dich_vu_2_sl', default: 0 },
+                'dich_vu_2_tt': { id: 'dich_vu_2_tt', default: 0, format: 'currency' },
+
+                'dich_vu_3': { id: 'dich_vu_3', default: 'Dịch vụ giữ xe' },
+                'dich_vu_3_dg': { id: 'dich_vu_3_dg', default: 0, format: 'currency' },
+                'dich_vu_3_sl': { id: 'dich_vu_3_sl', default: 0 },
+                'dich_vu_3_tt': { id: 'dich_vu_3_tt', default: 0, format: 'currency' },
+
+                'dich_vu_4': { id: 'dich_vu_4', default: 'Dịch vụ khác 1' },
+                'dich_vu_4_dg': { id: 'dich_vu_4_dg', default: 0, format: 'currency' },
+                'dich_vu_4_sl': { id: 'dich_vu_4_sl', default: 0 },
+                'dich_vu_4_tt': { id: 'dich_vu_4_tt', default: 0, format: 'currency' },
+
+                'dich_vu_5': { id: 'dich_vu_5', default: 'Dịch vụ khác 2' },
+                'dich_vu_5_dg': { id: 'dich_vu_5_dg', default: 0, format: 'currency' },
+                'dich_vu_5_sl': { id: 'dich_vu_5_sl', default: 0 },
+                'dich_vu_5_tt': { id: 'dich_vu_5_tt', default: 0, format: 'currency' },
+
+                // Notes
+                'ghi_chu': { id: 'ghi_chu', default: 'Không có ghi chú.' },
+
+                // Summary Section
+                'tong_tien': { id: 'tong_tien', default: 0, format: 'currency' },
+                'phat_sinh_khac': { id: 'phat_sinh_khac', default: 0, format: 'currency' },
+                'giam_tru_khac': { id: 'giam_tru_khac', default: 0, format: 'currency' },
+                'no_cu': { id: 'no_cu', default: 0, format: 'currency' },
+                'tong_cong': { id: 'tong_cong', default: 0, format: 'currency' },
+                'da_thanh_toan': { id: 'da_thanh_toan', default: 0, format: 'currency' },
+                'con_lai': { id: 'con_lai', default: 0, format: 'currency' },
+
+                // Payment Information
+                'qr_code': { id: 'qr_code', default: 'https://placehold.co/100x100/A0B0C0/FFFFFF?text=QR+Code' },
+                'chu_tai_khoan': { id: 'chu_tai_khoan', default: 'NGUYEN VAN A' },
+                'so_tai_khoan': { id: 'so_tai_khoan', default: '1234567890' }
+            };
+
+            // Populate elements based on dataMap
+            for (const key in dataMap) {
+                if (dataMap.hasOwnProperty(key)) {
+                    const elementInfo = dataMap[key];
+                    const element = document.getElementById(elementInfo.id);
+                    if (element) {
+                        let value = params[key] || elementInfo.default;
+
+                        // Apply formatting if specified
+                        if (elementInfo.format === 'currency') {
+                            value = formatCurrencyVND(value);
+                        } else if (elementInfo.id === 'ngay_tinh_hoa_don' && value === new Date().toLocaleDateString('vi-VN')) {
+                            // If default date is used, make sure it's formatted correctly
+                            value = new Date().toLocaleDateString('vi-VN');
+                        }
+
+                        if (elementInfo.id === 'qr_code') {
+                            element.src = value;
+                        } else {
+                            element.textContent = value;
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
