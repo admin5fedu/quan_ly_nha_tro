@@ -229,7 +229,7 @@
                 </div>
                  <div class="flex justify-between py-1 text-blue-600">
                     <span class="font-semibold text-sm">Đã thanh toán:</span>
-                    <span class="font-semibold text-sm" id="da_thanh_toan">0</span>
+                    <span class="font-semibold text-sm" id="da_thanh_thong_tin">0</span>
                 </div>
                 <div class="flex justify-between py-2 bg-red-100 rounded-lg px-3 mt-2">
                     <span class="text-lg font-bold text-red-600">Còn lại:</span>
@@ -249,7 +249,7 @@
                     <!-- Bank Details -->
                     <div class="space-y-2 text-center"> <!-- Centered bank details -->
                         <div class="p-2 bg-blue-50 rounded-lg border border-blue-200 inline-block"> <!-- Inline-block to wrap content -->
-                            <p class="font-bold text-blue-800 text-sm">VPB</p>
+                            <p class="font-bold text-blue-800 text-sm" id="ten_ngan_hang">VPB</p>
                             <p class="text-gray-700 text-sm">Tên tài khoản: <span class="font-semibold" id="chu_tai_khoan">-- Chủ tài khoản --</span></p>
                             <p class="text-gray-700 text-sm">Số tài khoản: <span class="font-semibold" id="so_tai_khoan">-- Số tài khoản --</span></p>
                         </div>
@@ -295,7 +295,7 @@
             // Numbers that should be formatted as currency are explicitly marked
             const dataMap = {
                 // Header
-                'ky_hoa_don': { id: 'ky_hoa_don', default: 'Tháng X, Năm YYYY' },
+                'ky_hoa_don': { id: 'ky_hoa_don', default: 'Tháng X, Năm 20XX' },
 
                 // Tenant and Room Information
                 'khach_thue': { id: 'khach_thue', default: 'Nguyễn Văn A' },
@@ -356,11 +356,12 @@
                 'giam_tru_khac': { id: 'giam_tru_khac', default: 0, format: 'currency' },
                 'no_cu': { id: 'no_cu', default: 0, format: 'currency' },
                 'tong_cong': { id: 'tong_cong', default: 0, format: 'currency' },
-                'da_thanh_toan': { id: 'da_thanh_toan', default: 0, format: 'currency' },
+                'da_thanh_toan': { id: 'da_thanh_thong_tin', default: 0, format: 'currency' },
                 'con_lai': { id: 'con_lai', default: 0, format: 'currency' },
 
                 // Payment Information
                 'qr_code': { id: 'qr_code', default: 'https://placehold.co/100x100/A0B0C0/FFFFFF?text=QR+Code' },
+                'ten_ngan_hang': { id: 'ten_ngan_hang', default: 'VPB' }, // New variable for bank name
                 'chu_tai_khoan': { id: 'chu_tai_khoan', default: 'NGUYEN VAN A' },
                 'so_tai_khoan': { id: 'so_tai_khoan', default: '1234567890' }
             };
