@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hóa Đơn Tiền Phòng</title>
     <!-- Import Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,21 +16,29 @@
             body {
                 margin: 0;
                 padding: 0;
+                /* Ensure no unexpected margins on the body in print */
             }
             .invoice-container {
                 box-shadow: none !important;
                 border-radius: 0 !important;
                 /* Adjust padding for A4, typically around 1cm to 1.5cm */
-                padding: 1cm !important; /* Uniform padding */
-                width: 21cm; /* A4 width */
-                min-height: 29.7cm; /* A4 height */
+                padding: 1cm !important; /* Uniform padding for print */
+                width: 100% !important; /* Allow width to be flexible within print margins */
                 max-width: none !important; /* Remove max-width for print */
                 margin: 0 auto !important; /* Center on page */
-                font-size: 0.75em; /* Significantly reduce base font size for print */
+                
+                /* IMPORTANT: Remove min-height to prevent blank second page */
+                min-height: auto !important; 
+                height: auto !important; /* Ensure height adjusts to content */
+
+                /* Reduce base font size for print to fit more content naturally */
+                font-size: 0.75em; 
                 line-height: 1.1; /* Tighten line height */
                 
-                /* Aggressive scaling if content still overflows. Adjust as needed. */
-                transform: scale(0.92); /* Further reduced scale */
+                /* Remove aggressive scaling unless absolutely necessary, 
+                   as it can cause unexpected layout issues. 
+                   If content still overflows, consider adjusting padding/margins or font sizes more. */
+                transform: none !important; 
                 transform-origin: top left;
             }
             /* Further reduce font size for specific elements if still overflowing */
@@ -200,7 +208,7 @@
 
         <!-- Notes Section - moved above the combined summary/payment section -->
         <div class="mt-5 border-t pt-3 text-xs text-gray-600">
-             <p><span class="font-semibold">Ghi chú:</span> <span id="ghi_chu">-- Ghi chú --</span></p>
+               <p><span class="font-semibold">Ghi chú:</span> <span id="ghi_chu">-- Ghi chú --</span></p>
         </div>
 
         <!-- Combined Summary and Payment Information Section -->
@@ -219,7 +227,7 @@
                     <span class="text-sm text-gray-600">Giảm trừ khác:</span>
                     <span class="font-medium text-gray-800 text-sm" id="giam_tru_khac">0</span>
                 </div>
-                 <div class="flex justify-between py-1">
+                   <div class="flex justify-between py-1">
                     <span class="text-sm text-gray-600">Nợ cũ:</span>
                     <span class="font-medium text-gray-800 text-sm" id="no_cu">0</span>
                 </div>
@@ -227,7 +235,7 @@
                     <span class="text-base font-bold text-gray-900">Tổng cộng:</span>
                     <span class="text-base font-bold text-gray-900" id="tong_cong">0</span>
                 </div>
-                 <div class="flex justify-between py-1 text-blue-600">
+                   <div class="flex justify-between py-1 text-blue-600">
                     <span class="font-semibold text-sm">Đã thanh toán:</span>
                     <span class="font-semibold text-sm" id="da_thanh_thong_tin">0</span>
                 </div>
